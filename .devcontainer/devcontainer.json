@@ -1,0 +1,15 @@
+{
+    "name": "Ingress Server Dev Container",
+    "dockerFile": "../Dockerfile",
+    "context": "..",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "twxs.cmake"
+            ]
+        }
+    },
+    "runArgs": ["--init", "-p", "4009:4009/udp"],
+    "postCreateCommand": "mkdir -p build && cd build && cmake .. && make"
+}
