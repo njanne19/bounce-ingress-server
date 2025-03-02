@@ -6,10 +6,16 @@
         "vscode": {
             "extensions": [
                 "ms-vscode.cpptools",
-                "twxs.cmake"
+                "twxs.cmake",
+                "ms-vscode.cpptools-extension-pack"
             ]
         }
     },
-    "runArgs": ["--init", "-p", "4009:4009/udp"],
-    "postCreateCommand": "mkdir -p build && cd build && cmake .. && make"
+    "runArgs": [
+        "--init",
+        "-p", "4009:4009/udp",
+        "--cap-add=SYS_PTRACE",
+        "--security-opt", "seccomp=unconfined"
+    ],
+    "postCreateCommand": "mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make"
 }

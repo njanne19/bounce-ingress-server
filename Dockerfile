@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \ 
     gdb \
     python3 \
+    libboost-all-dev \
     && rm -rf /var/lib/apt/lists/* 
 
 WORKDIR /app 
@@ -18,7 +19,10 @@ COPY CMakeLists.txt .
 COPY src/ ./src/
 
 # Build the project using out-of-source build
-RUN mkdir -p build && cd build && cmake .. && make 
+RUN mkdir build && \
+    cd build && \
+    cmake -B . -S .. && \
+    make
 
 # Expose the UDP port (4009) 
 EXPOSE 4009/udp 
